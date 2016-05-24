@@ -83,3 +83,71 @@ animalNames.forEach(function(animal) {
   console.log(animal);
   farm.push(AnimalMaker(animal));
 });
+
+
+
+// Part 2: eFarmony Functions
+
+var AnimalTestUser = function(username) {
+  if (arguments.length > 1) {
+    var argsArray = [];
+      for (var i = 0;i < arguments.length; i++){
+        argsArray.push(arguments[i]);
+      };
+    return {
+      username: username,
+      otherArgs: argsArray
+    };
+  } else {
+    return {
+      username: username,
+    };
+  }
+};
+
+
+var AnimalCreator = function(username, species, tagline, noises){
+  return {
+    username: username,
+    species: species,
+    tagline: tagline,
+    noises: noises,
+    friends: []
+  }
+}
+
+var addFriend = function(animal, friendAnimal) {
+  animal.friends.push(friendAnimal.username);
+};
+
+// Create a myfarm collection with at least 3 animal objects
+
+var sheep = AnimalCreator('Cloud', 'sheep', 'You can count on me!', ['baahhh', 'arrgg', 'chewchewchew']);
+var cow = AnimalCreator('MooveOver', 'cow', 'You can cownt on me!', ['moo', 'rawr', 'ding ding']);
+var dog = AnimalCreator('Izzbizz', 'dog', 'I wove squirrels', ['roof', 'rawrawraw', 'panting']);
+
+addFriend(dog, cow);
+addFriend(cow, dog);
+addFriend(sheep, dog);
+
+var myFarm = [sheep, dog, cow]
+console.log(myFarm);
+
+// Create a function addMatchesArray
+
+
+var addMatchesArray = function(farm) {
+  farm.forEach(function(animal){
+    animal.matches = [];
+  });
+};
+
+addMatchesArray(myFarm);
+console.log(myFarm);
+
+var giveMatches = function(farm) {
+  farm.forEach(function(animal){
+  var friend = animal.friends[Math.floor(Math.random() * animal.friends.length)];
+  animal.matches.push(friend);
+  });
+}
