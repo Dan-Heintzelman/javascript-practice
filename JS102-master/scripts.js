@@ -88,22 +88,40 @@ animalNames.forEach(function(animal) {
 
 // Part 2: eFarmony Functions
 
+// var AnimalTestUser = function(username) {
+//   if (arguments.length > 1) {
+//     var argsArray = [];
+//       for (var i = 0;i < arguments.length; i++){
+//         argsArray.push(arguments[i]);
+//       };
+//     return {
+//       username: username,
+//       otherArgs: argsArray
+//     };
+//   } else {
+//     return {
+//       username: username,
+//     };
+//   }
+// };
+
+//Refactor
+
 var AnimalTestUser = function(username) {
-  if (arguments.length > 1) {
-    var argsArray = [];
-      for (var i = 0;i < arguments.length; i++){
+  var argLength = arguments.length;
+  var argsArray = [];
+  if (argLength > 1) {
+      for (var i = 1;i < argLength; i++){
         argsArray.push(arguments[i]);
-      };
+      }
+  };
     return {
       username: username,
       otherArgs: argsArray
     };
-  } else {
-    return {
-      username: username,
-    };
-  }
 };
+
+
 
 
 var AnimalCreator = function(username, species, tagline, noises){
@@ -114,6 +132,18 @@ var AnimalCreator = function(username, species, tagline, noises){
     noises: noises,
     friends: []
   }
+}
+
+//Refactor (side effect is creatin a new job rather than returning an object literal on function call)
+
+function AnimalCreator(username, species, tagline, noises) {
+  var animal = {
+    username: username,
+    species: species,
+    tagline: tagline,
+    noises: noises,
+    friends: []
+  };
 }
 
 var addFriend = function(animal, friendAnimal) {
@@ -147,7 +177,9 @@ console.log(myFarm);
 
 var giveMatches = function(farm) {
   farm.forEach(function(animal){
-  var friend = animal.friends[Math.floor(Math.random() * animal.friends.length)];
-  animal.matches.push(friend);
+    var friend = animal.friends[Math.floor(Math.random() * animal.friends.length)];
+    animal.matches.push(friend);
   });
 }
+
+// Nested Data Structures
