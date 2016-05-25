@@ -183,3 +183,24 @@ var giveMatches = function(farm) {
 }
 
 // Nested Data Structures
+
+
+var friends = [];
+
+friends.push(myFarm[0].username, myFarm[1].username);
+
+console.log(friends)
+
+var relationships = {};
+relationships.friends = friends;
+console.log(relationships.friends.length);
+
+var matches = [];
+relationships.matches = matches;
+relationships.matches.push(relationships.friends[0]);
+console.log(relationships);
+
+for(var i = 0; i < myFarm.length; i++) {
+  myFarm[i].relationships = relationships;
+};
+console.log(myFarm);
